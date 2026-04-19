@@ -125,11 +125,3 @@ Viết commit message rõ ràng, ví dụ:
 | 5 | Linear Regression | C |
 | 6 | Random Forest + Họp review | D + cả nhóm |
 | 7 | Tổng hợp báo cáo + slide cuối | D + cả nhóm |
-
----
-
-Bạn chỉ cần thay:
-- `https://github.com/ten_cua_ban/movie-rating-prediction.git` bằng link repo thật của nhóm
-- Tên nền tảng họp nhóm (nếu có)
-
-Cần tôi hướng dẫn tiếp **Ngày 2** cho Duy (làm sạch dữ liệu + baseline) không?
