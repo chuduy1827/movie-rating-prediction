@@ -1,45 +1,64 @@
 # Movie Rating Prediction
 
-Dự án xây dựng mô hình Machine Learning để dự đoán rating (điểm đánh giá) của người dùng cho phim, dựa trên bộ dữ liệu MovieLens.
+Dự án xây dựng mô hình Machine Learning để dự đoán rating phim từ dataset **MovieLens 20M** (20 triệu đánh giá).
 
-## Thành viên nhóm
+## Kết quả chính
 
-| Thành viên | Nhiệm vụ chính |
-|------------|----------------|
-| **Duy** | Đọc dữ liệu, làm sạch, xây dựng Baseline |
-| **B** | EDA, Feature Selection, vẽ biểu đồ |
-| **C** | Tiền xử lý, Linear Regression |
-| **D** | Random Forest/XGBoost, đánh giá, viết báo cáo |
+| Mô hình | MAE | RMSE | R² | Người thực hiện |
+|---------|-----|------|-----|-----------------|
+| **Baseline (Mean)** | 0.8405 | 1.0522 | - | Duy |
+| Linear Regression | ? | ? | ? | Tuân |
+| Random Forest | ? | ? | ? | Thịnh |
+
+> 📌 *Kết quả Linear Regression và Random Forest sẽ được cập nhật sau khi hoàn thành.*
+
+## Phân công nhiệm vụ
+
+| Thành viên | Nhiệm vụ | Kỹ năng sử dụng |
+|------------|----------|------------------|
+| **Duy** | Đọc dữ liệu, làm sạch, Baseline model | Python, Pandas, LaTeX |
+| **Phúc** | EDA, Feature Selection, vẽ biểu đồ | Pandas, Matplotlib, Seaborn |
+| **Tuân** | Tiền xử lý, Linear Regression | Scikit-learn, Pandas |
+| **Thịnh** | Random Forest/XGBoost, đánh giá, viết báo cáo | Scikit-learn, Matplotlib |
+
+## Cấu trúc dự án
+
+movie-rating-prediction/
+│
+├── notebooks/
+│   └── baseline.ipynb          # Code của Duy (đọc dữ liệu, làm sạch, baseline)
+│
+├── slides/
+│   └── presentation.tex        # Slide thuyết trình LaTeX Beamer
+│
+├── data/                       # Dữ liệu MovieLens (đã .gitignore)
+│   ├── ratings.csv
+│   ├── movies.csv
+│   └── tags.csv
+│
+├── baseline_results.csv        # Kết quả baseline model
+├── requirements.txt            # Thư viện cần cài đặt
+├── .gitignore                  # Bỏ qua file lớn và data
+└── README.md                   # Mô tả dự án
 
 ## Công nghệ sử dụng
 
-- Python 3.9+
-- pandas - xử lý dữ liệu
-- numpy - tính toán số học
-- matplotlib & seaborn - vẽ biểu đồ
-- scikit-learn - xây dựng mô hình
+| Công nghệ | Phiên bản | Mục đích |
+|-----------|-----------|----------|
+| Python | 3.9+ | Ngôn ngữ lập trình |
+| Pandas | - | Xử lý và phân tích dữ liệu |
+| NumPy | - | Tính toán số học |
+| Matplotlib/Seaborn | - | Vẽ biểu đồ, EDA |
+| Scikit-learn | - | Linear Regression, Random Forest, metrics |
+| Jupyter | - | Môi trường chạy code |
+| LaTeX (Beamer) | - | Tạo slide thuyết trình |
 
-## Cấu trúc thư mục
-
-movie-rating-prediction/
-├── data/                  # chứa file CSV (đã được .gitignore)
-├── notebooks/             # chứa các Jupyter Notebook
-│   ├── duy/
-│   ├── b/
-│   ├── c/
-│   └── d/
-├── slides/                # chứa file thuyết trình PPTX
-├── report/                # chứa báo cáo PDF cuối cùng
-└── README.md              # file hướng dẫn này
-
-##  Cách cài đặt và chạy
+## Cách chạy code
 
 ### 1. Clone repository
 
-```bash
-git clone https://github.com/ten_cua_ban/movie-rating-prediction.git
+git clone https://github.com/chuduy1827/movie-rating-prediction.git
 cd movie-rating-prediction
-```
 
 ### 2. Tạo môi trường ảo (khuyến nghị)
 
@@ -53,75 +72,79 @@ source venv/bin/activate
 
 ### 3. Cài đặt thư viện
 
-pip install pandas numpy matplotlib seaborn scikit-learn
+pip install -r requirements.txt
 
-(Nếu sử dụng XGBoost, cài thêm: `pip install xgboost`)
+### 4. Tải dữ liệu MovieLens 20M
 
-### 4. Tải dữ liệu
+- Truy cập: https://grouplens.org/datasets/movielens/20m/
+- Tải file `ml-20m.zip`
+- Giải nén và copy 3 file (`ratings.csv`, `movies.csv`, `tags.csv`) vào thư mục `data/`
 
-Tải các file sau từ [MovieLens](https://grouplens.org/datasets/movielens/) (bộ small hoặc 100k) và đặt vào thư mục `data/`:
+### 5. Chạy Jupyter Notebook
 
-- `ratings.csv`
-- `movies.csv`
-- `tags.csv`
+jupyter notebook notebooks/baseline.ipynb
 
-> **Lưu ý:** Thư mục `data/` đã được thêm vào `.gitignore` để không push dữ liệu lên GitHub.
+Chạy lần lượt các cell từ trên xuống dưới.
 
-### 5. Chạy các notebook theo thứ tự
+## Chi tiết Baseline Model (Duy)
 
-| Thứ tự | Notebook | Người thực hiện | Nội dung |
-|--------|----------|-----------------|----------|
-| 1 | `01_duy_data_cleaning.ipynb` | Duy | Đọc dữ liệu, làm sạch, baseline |
-| 2 | `02_b_eda.ipynb` | B | EDA, vẽ biểu đồ, chọn feature |
-| 3 | `03_c_preprocessing.ipynb` | C | Tiền xử lý dữ liệu |
-| 4 | `04_c_linear_regression.ipynb` | C | Linear Regression |
-| 5 | `05_d_random_forest.ipynb` | D | Random Forest, đánh giá |
+### Các bước thực hiện
 
-## Kết quả dự kiến
+| Bước | Mô tả |
+|------|-------|
+| 1 | Đọc 3 file CSV (ratings, movies, tags) |
+| 2 | Merge theo `movieId` |
+| 3 | Xử lý missing values (genres → 'Unknown') |
+| 4 | Xóa duplicate (nếu có) |
+| 5 | Chuẩn hóa kiểu dữ liệu (timestamp → datetime) |
+| 6 | Xây dựng baseline: dự đoán = mean rating |
+| 7 | Tính MAE, RMSE |
 
-- So sánh 3 mô hình: Baseline, Linear Regression, Random Forest
-- Đánh giá qua các chỉ số: MAE, RMSE, R²
-- Biểu đồ sai số (residuals) và scatter plot dự đoán vs thực tế
+### Công thức Baseline
 
-## Quy tắc làm việc nhóm
+\[
+\hat{y}_i = \bar{y} = \frac{1}{n}\sum_{i=1}^{n} y_i
+\]
 
-### Git workflow
+### Kết quả (trên 1 triệu dòng test)
 
-1. Mỗi người làm việc trên **branch riêng** của mình
-2. Không commit trực tiếp vào branch `main`
-3. Sau khi hoàn thành, tạo **Pull Request** để review code
-4. Người được phân công review sẽ kiểm tra và merge
 
-### Branch naming
+==================================================
+KẾT QUẢ BASELINE MODEL
+==================================================
+MAE:  0.8405
+RMSE: 1.0522
+Mean Rating: 3.5268
 
-- `duy`
-- `b`
-- `c`
-- `d`
+## Ghi chú
 
-### Commit message
+- Dữ liệu gốc MovieLens 20M (~500MB) **không được upload lên GitHub** do dung lượng lớn
+- File `cleaned_data.csv` (76MB) vượt quá giới hạn GitHub (50MB) nên được ignore
+- Để chạy full dữ liệu, cần tải từ link gốc và đặt vào thư mục `data/`
 
-Viết commit message rõ ràng, ví dụ:
-- `git commit -m "done: data cleaning and baseline"`
-- `git commit -m "add: EDA histogram and boxplot"`
+## Cập nhật
 
-### Review code chéo
+| Ngày | Nội dung |
+|------|----------|
+| 20/04/2026 | Hoàn thành Baseline Model (MAE=0.8405, RMSE=1.0522) |
+| 20/04/2026 | Tạo repository GitHub, upload code và slide |
+| 21/04/2026 | Chờ cập nhật kết quả từ các thành viên khác |
 
-| Người viết | Người review |
-|-------------|---------------|
-| Duy | D |
-| B | C |
-| C | B |
-| D | tổng thể |
+## Liên kết
 
-## Tiến độ dự kiến
+- **GitHub Repository:** https://github.com/chuduy1827/movie-rating-prediction
+- **Dataset MovieLens 20M:** https://grouplens.org/datasets/movielens/20m/
 
-| Ngày | Nhiệm vụ | Người thực hiện |
-|------|----------|------------------|
-| 1 | Kick-off, tạo repo, chia task | Cả nhóm |
-| 2 | Làm sạch dữ liệu + Baseline | Duy |
-| 3 | EDA + Feature Selection | B |
-| 4 | Tiền xử lý | C |
-| 5 | Linear Regression | C |
-| 6 | Random Forest + Họp review | D + cả nhóm |
-| 7 | Tổng hợp báo cáo + slide cuối | D + cả nhóm |
+## Thành viên nhóm
+
+| STT | Họ tên | Nhiệm vụ |
+|-----|--------|----------|
+| 1 | Duy | Đọc dữ liệu + Làm sạch + Baseline + Slide |
+| 2 | Phúc | EDA + Feature Selection + Vẽ biểu đồ |
+| 3 | Tuân | Tiền xử lý + Linear Regression |
+| 4 | Thịnh | Random Forest + Đánh giá + Báo cáo + Slide |
+
+
+**Liên hệ:** chud53701@gmail.com
+
+*Project hoàn thành trong khuôn khổ môn học Data Analysis with Python.*
