@@ -84,12 +84,12 @@ pip install -r requirements.txt
 
 jupyter notebook notebooks/baseline.ipynb
 Để chạy phần Linear Regression của Tuân:
-```bash
+
 jupyter notebook linear_regression_tuan.ipynb
 linear_regression_results_tuan.csv
 Chạy lần lượt các cell từ trên xuống dưới.
 
-## Chi tiết Baseline Model (Duy)
+### 6. Chi tiết Baseline Model (Duy)
 
 ### Các bước thực hiện
 
