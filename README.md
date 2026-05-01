@@ -2,16 +2,6 @@
 
 Dự án xây dựng mô hình Machine Learning để dự đoán rating phim từ dataset **MovieLens 20M** (20 triệu đánh giá).
 
-## Kết quả chính
-
-| Mô hình | MAE | RMSE | R² | Người thực hiện |
-|---------|-----|------|-----|-----------------|
-| **Baseline (Mean)** | 0.8405 | 1.0522 | - | Duy |
-| Linear Regression | ? | ? | ? | Tuân |
-| Random Forest | ? | ? | ? | Thịnh |
-
-> 📌 *Kết quả Linear Regression và Random Forest sẽ được cập nhật sau khi hoàn thành.*
-
 ## Phân công nhiệm vụ
 
 | Thành viên | Nhiệm vụ | Kỹ năng sử dụng |
@@ -20,6 +10,16 @@ Dự án xây dựng mô hình Machine Learning để dự đoán rating phim t�
 | **Phúc** | EDA, Feature Selection, vẽ biểu đồ | Pandas, Matplotlib, Seaborn |
 | **Tuân** | Tiền xử lý, Linear Regression | Scikit-learn, Pandas |
 | **Thịnh** | Random Forest/XGBoost, đánh giá, viết báo cáo | Scikit-learn, Matplotlib |
+
+## Kết quả chính
+
+| Mô hình | MAE | RMSE | R² | Người thực hiện |
+|---|---:|---:|---:|---|
+| Baseline (Mean) | 0.8405 | 1.0522 | - | Duy |
+| Linear Regression | 0.8221 | 1.0315 | 0.0374 | Tuân |
+| Random Forest | ? | ? | ? | Thịnh |
+
+> 📌 *> Linear Regression đã hoàn thành và cho kết quả tốt hơn Baseline. Random Forest sẽ được cập nhật sau.*
 
 ## Cấu trúc dự án
 
@@ -83,7 +83,10 @@ pip install -r requirements.txt
 ### 5. Chạy Jupyter Notebook
 
 jupyter notebook notebooks/baseline.ipynb
-
+Để chạy phần Linear Regression của Tuân:
+```bash
+jupyter notebook linear_regression_tuan.ipynb
+linear_regression_results_tuan.csv
 Chạy lần lượt các cell từ trên xuống dưới.
 
 ## Chi tiết Baseline Model (Duy)
@@ -122,27 +125,48 @@ Mean Rating: 3.5268
 - File `cleaned_data.csv` (76MB) vượt quá giới hạn GitHub (50MB) nên được ignore
 - Để chạy full dữ liệu, cần tải từ link gốc và đặt vào thư mục `data/`
 
+## Chi tiết Linear Regression Model (Tuân)
+
+### Các bước thực hiện
+
+| Bước | Mô tả |
+|---|---|
+| 1 | Đọc dữ liệu `ratings.csv` và `movies.csv` |
+| 2 | Merge dữ liệu theo `movieId` |
+| 3 | Xử lý missing values trong cột `genres` |
+| 4 | Xóa duplicate rows |
+| 5 | Chuyển đổi `timestamp` sang định dạng datetime |
+| 6 | Tạo thêm các đặc trưng thời gian: `year`, `month`, `dayofweek` |
+| 7 | One-hot encoding cột `genres` |
+| 8 | Chia dữ liệu thành train/test set |
+| 9 | Huấn luyện mô hình Linear Regression |
+| 10 | Đánh giá mô hình bằng MAE, RMSE và R² |
+
+### Kết quả
+
+| Model | MAE | RMSE | R² |
+|---|---:|---:|---:|
+| Baseline (Mean) | 0.8405 | 1.0522 | - |
+| Linear Regression | 0.8221 | 1.0315 | 0.0374 |
+
+### Nhận xét
+
+Mô hình Linear Regression cho kết quả tốt hơn mô hình Baseline. MAE giảm từ `0.8405` xuống `0.8221`, trong khi RMSE giảm từ `1.0522` xuống `1.0315`. Điều này cho thấy mô hình Linear Regression đã cải thiện độ chính xác dự đoán so với việc chỉ dự đoán bằng giá trị rating trung bình.
+
+Tuy nhiên, chỉ số R² = `0.0374` vẫn còn thấp, cho thấy các đặc trưng hiện tại mới chỉ giải thích được một phần nhỏ sự biến thiên của rating. Điều này là hợp lý vì rating phim phụ thuộc nhiều vào sở thích cá nhân của người dùng và cần thêm các đặc trưng mạnh hơn để cải thiện mô hình.
+
 ## Cập nhật
 
 | Ngày | Nội dung |
-|------|----------|
+|---|---|
 | 20/04/2026 | Hoàn thành Baseline Model (MAE=0.8405, RMSE=1.0522) |
 | 20/04/2026 | Tạo repository GitHub, upload code và slide |
-| 21/04/2026 | Chờ cập nhật kết quả từ các thành viên khác |
-
+| 21/04/2026 | Hoàn thành Linear Regression Model bởi Tuân (MAE=0.8221, RMSE=1.0315, R²=0.0374) |
+| 21/04/2026 | Linear Regression cho kết quả tốt hơn Baseline |
 ## Liên kết
 
 - **GitHub Repository:** https://github.com/chuduy1827/movie-rating-prediction
 - **Dataset MovieLens 20M:** https://grouplens.org/datasets/movielens/20m/
-
-## Thành viên nhóm
-
-| STT | Họ tên | Nhiệm vụ |
-|-----|--------|----------|
-| 1 | Duy | Đọc dữ liệu + Làm sạch + Baseline + Slide |
-| 2 | Phúc | EDA + Feature Selection + Vẽ biểu đồ |
-| 3 | Tuân | Tiền xử lý + Linear Regression |
-| 4 | Thịnh | Random Forest + Đánh giá + Báo cáo + Slide |
 
 
 **Liên hệ:** chud53701@gmail.com
