@@ -16,7 +16,7 @@ Dự án xây dựng mô hình Machine Learning để dự đoán rating phim t�
 | Mô hình | MAE | RMSE | R² | Người thực hiện |
 |---|---:|---:|---:|---|
 | Baseline (Mean) | 0.8405 | 1.0522 | - | Duy |
-| Linear Regression | 0.8221 | 1.0315 | 0.0374 | Tuân |
+| Linear Regression (EDA-based) | 0.6600 | 0.8576 | 0.3345 | Tuân |
 | Random Forest | ? | ? | ? | Thịnh |
 
 > 📌 *> Linear Regression đã hoàn thành và cho kết quả tốt hơn Baseline. Random Forest sẽ được cập nhật sau.*
@@ -146,14 +146,18 @@ Mean Rating: 3.5268
 
 | Model | MAE | RMSE | R² |
 |---|---:|---:|---:|
-| Baseline (Mean) | 0.8405 | 1.0522 | - |
-| Linear Regression | 0.8221 | 1.0315 | 0.0374 |
+| Baseline (Mean) | 0.8405 | 1.0522 | - | Duy |
+| Linear Regression (EDA-based) | 0.6600 | 0.8576 | 0.3345 | Tuân |
 
 ### Nhận xét
 
-Mô hình Linear Regression cho kết quả tốt hơn mô hình Baseline. MAE giảm từ `0.8405` xuống `0.8221`, trong khi RMSE giảm từ `1.0522` xuống `1.0315`. Điều này cho thấy mô hình Linear Regression đã cải thiện độ chính xác dự đoán so với việc chỉ dự đoán bằng giá trị rating trung bình.
+Mô hình Linear Regression sau khi sử dụng các đặc trưng được chọn từ giai đoạn EDA và Feature Selection cho kết quả tốt hơn rõ rệt so với mô hình Baseline. MAE giảm từ **0.8405** xuống **0.6600**, và RMSE giảm từ **1.0522** xuống **0.8576**, cho thấy sai số dự đoán trung bình cũng như các sai số lớn đều được cải thiện.
 
-Tuy nhiên, chỉ số R² = `0.0374` vẫn còn thấp, cho thấy các đặc trưng hiện tại mới chỉ giải thích được một phần nhỏ sự biến thiên của rating. Điều này là hợp lý vì rating phim phụ thuộc nhiều vào sở thích cá nhân của người dùng và cần thêm các đặc trưng mạnh hơn để cải thiện mô hình.
+Kết quả này cho thấy rating của người dùng không hoàn toàn ngẫu nhiên, mà có thể được giải thích một phần thông qua các đặc trưng như rating trung bình của phim, rating trung bình của người dùng, số lượt đánh giá và một số thể loại phim. Đặc biệt, các đặc trưng liên quan đến hành vi rating trước đó của user và mức độ được đánh giá của movie có ảnh hưởng đáng kể đến khả năng dự đoán.
+
+Tuy nhiên, chỉ số **R² = 0.3345** cũng cho thấy mô hình mới chỉ giải thích được khoảng một phần ba sự biến thiên của rating. Điều này hợp lý vì rating phim còn phụ thuộc nhiều vào sở thích cá nhân, ngữ cảnh xem phim và các yếu tố khó biểu diễn bằng những đặc trưng tuyến tính đơn giản.
+
+Nhìn chung, Linear Regression là một bước cải thiện tốt so với Baseline, đồng thời cho thấy Feature Engineering đóng vai trò quan trọng trong bài toán dự đoán rating.
 
 ## Cập nhật
 
@@ -161,8 +165,8 @@ Tuy nhiên, chỉ số R² = `0.0374` vẫn còn thấp, cho thấy các đặc 
 |---|---|
 | 20/04/2026 | Hoàn thành Baseline Model (MAE=0.8405, RMSE=1.0522) |
 | 20/04/2026 | Tạo repository GitHub, upload code và slide |
-| 21/04/2026 | Hoàn thành Linear Regression Model bởi Tuân (MAE=0.8221, RMSE=1.0315, R²=0.0374) |
-| 21/04/2026 | Linear Regression cho kết quả tốt hơn Baseline |
+| 21/04/2026 | Tuân hoàn thành mô hình Linear Regression dựa trên pipeline EDA + Feature Selection của Phúc |
+| 21/04/2026 | Kết quả cải thiện mạnh: MAE=0.6600, RMSE=0.8576, R²=0.3345 |
 ## Liên kết
 
 - **GitHub Repository:** https://github.com/chuduy1827/movie-rating-prediction
